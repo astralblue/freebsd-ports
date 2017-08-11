@@ -131,6 +131,12 @@ post-install:
 		${STAGEDIR}${PREFIX}/etc/gdm/PostSession/Default.sample
 	${MV} ${STAGEDIR}${PREFIX}/etc/gdm/PreSession/Default \
 		${STAGEDIR}${PREFIX}/etc/gdm/PreSession/Default.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/gdm/Init/Default \
+		${STAGEDIR}${PREFIX}/etc/gdm/Init/Default.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/gdm/Xsession \
+		${STAGEDIR}${PREFIX}/etc/gdm/Xsession.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/dbus-1/system.d/gdm.conf \
+		${STAGEDIR}${PREFIX}/etc/dbus-1/system.d/gdm.conf.sample
 
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/xsessions
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/gdm/Sessions
@@ -139,13 +145,13 @@ post-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/gdm/home
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/gdm/home/.pulse/
 
-	${INSTALL_DATA} ${WRKDIR}/gdm-autologin ${STAGEDIR}${PREFIX}/etc/pam.d/gdm-autologin
-	${INSTALL_DATA} ${WRKDIR}/gdm-launch-environment ${STAGEDIR}${PREFIX}/etc/pam.d/gdm-launch-environment
-	${INSTALL_DATA} ${WRKDIR}/gdm-password ${STAGEDIR}${PREFIX}/etc/pam.d/gdm-password
+	${INSTALL_DATA} ${WRKDIR}/gdm-autologin ${STAGEDIR}${PREFIX}/etc/pam.d/gdm-autologin.sample
+	${INSTALL_DATA} ${WRKDIR}/gdm-launch-environment ${STAGEDIR}${PREFIX}/etc/pam.d/gdm-launch-environment.sample
+	${INSTALL_DATA} ${WRKDIR}/gdm-password ${STAGEDIR}${PREFIX}/etc/pam.d/gdm-password.sample
 
-	${INSTALL_DATA} ${WRKDIR}/client.conf ${STAGEDIR}${PREFIX}/etc/gdm/home/.pulse/
+	${INSTALL_DATA} ${WRKDIR}/client.conf ${STAGEDIR}${PREFIX}/etc/gdm/home/.pulse/client.conf.sample
 
-	${INSTALL_DATA} ${WRKDIR}/locale.conf ${STAGEDIR}${PREFIX}/etc/gdm/
+	${INSTALL_DATA} ${WRKDIR}/locale.conf ${STAGEDIR}${PREFIX}/etc/gdm/locale.conf.sample
 
 	@${SED} -e 's|%%PREFIX%%|${PREFIX}|g' < ${PKGDIR}/pkg-message \
 		| /usr/bin/fmt 75 79 > ${PKGMESSAGE}
